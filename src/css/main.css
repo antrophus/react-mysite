@@ -1,0 +1,8 @@
+@charset "UTF-8";
+#main {margin: 40px 20px 40px 20px; }
+
+#main #profile-img {float: left; width:300px; }
+#main #greetings {float: right; width:620px; text-align: left; }
+
+
+

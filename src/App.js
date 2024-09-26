@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Main from './pages/main/Main';
+import LoginForm from './pages/user/LoginForm';
+import JoinForm from './pages/user/JoinForm';
+import EditForm from './pages/user/EditForm';
 
+//css 전체 공통 적용
+import './css/mysite.css';
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div>
+
+      <BrowserRouter>
+
+        <Routes>
+
+          <Route path='' element={<Main />} />
+          <Route path='/user/loginform' element={<LoginForm />} />
+          <Route path='/user/joinform' element={<JoinForm />} />
+          <Route path='/user/editform' element={<EditForm />} />
+
+        </Routes>
+
+      </BrowserRouter>
+
     </div>
+
   );
+
 }
 
 export default App;
