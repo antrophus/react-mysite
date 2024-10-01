@@ -1,6 +1,9 @@
 //import 라이브러리
-import React, {useState} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+
+import Header from '../include/Header';
+import Footer from '../include/Footer';
 
 //css 전역에 적용되지만 #main 아래만 적용되도록  css를 코딩했음
 import '../../css/main.css';
@@ -8,9 +11,6 @@ import '../../css/main.css';
 const Main = () => {
 
     /*---라우터 관련-------------------------------*/
-    const [token, setToken] = useState(localStorage.getItem('token'));
-    const [authUser, setAuthUser] = useState(JSON.parse(localStorage.getItem('authUser')));
-
     // const userName = JSON.parse(authUser).name;
     /*---상태관리 변수들(값이 변화면 화면 랜더링 )---*/
 
@@ -20,57 +20,16 @@ const Main = () => {
     /*---일반 메소드 -----------------------------*/
 
     /*---훅(useEffect)+이벤트(handle)메소드-------*/
-    const handleLogout = () => {
-        console.log('로그아웃');
-
-        // 로그아웃 로직
-        // 로컬스토리지에 토큰 삭제
-        localStorage.removeItem('token');
-        // 로컬스토리지에 authUser 삭제
-        localStorage.removeItem('authUser');
-
-        //화면 반영을 위한 상태값 변경
-        setToken(null);
-        setAuthUser(null);
-        
-    };
+    
 
     return (
 
         <>
 
             <div id="wrap">
-
-                <div id="header" className="clearfix">
-                    <h1>
-                        <Link to="/" rel="noreferrer noopener">MySite</Link>
-                    </h1>
-
-                    {
-                        (token != null) ? (
-                            <ul>
-                                <li> {authUser.name}님 안녕하세요^^</li>
-                                <li><button className="btn_s" onClick={handleLogout}>로그아웃</button></li>
-                                <li><Link to="/user/editform" className="btn_s">회원정보수정</Link></li>
-                            </ul>
-                        ) : (
-                            <ul>
-                                <li><Link to="/user/loginform" className="btn_s">로그인</Link></li>
-                                <li><Link to="/user/joinform" className="btn_s">회원가입</Link></li>
-                            </ul>
-                        )}
-                </div>
+                {/* header */}
+                <Header />
                 {/* //header */}
-
-                <div id="nav">
-                    <ul className="clearfix">
-                        <li><Link to="">입사지원서</Link></li>
-                        <li><Link to="">게시판</Link></li>
-                        <li><Link to="">갤러리</Link></li>
-                        <li><Link to="">방명록</Link></li>
-                    </ul>
-                </div>
-                {/* //nav */}
 
 
                 <div id="container" className="clearfix">
@@ -111,14 +70,11 @@ const Main = () => {
                     </div>
                     {/* //full-content */}<br />
 
-
                 </div>
                 {/* <!-- //container --> */}
 
-
-                <div id="footer">
-                    Copyright ⓒ 2020 황일영. All right reserved
-                </div>
+                {/* <!-- footer --> */}
+                <Footer />
                 {/* <!-- //footer --> */}
 
             </div >

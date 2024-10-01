@@ -1,7 +1,10 @@
 //import 라이브러리
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
+
+import Header from '../include/Header';
+import Footer from '../include/Footer';
 
 //css 전역에 적용되지만 #user
 import '../../css/user.css';
@@ -46,7 +49,7 @@ const LoginForm = () => {
         //전송
         axios({
             method: 'post',
-            url: 'http://localhost:9000/api/users/login',
+            url: `${process.env.REACT_APP_API_URL}/api/users/login`,
             //요청시 header, data, responseType
             headers: { 'Content-Type': 'application/json; charset=utf-8' }, // post, put
             data: userVo,
@@ -60,7 +63,6 @@ const LoginForm = () => {
             /* const token = response.headers.authorization.split(' ')[1];
                 console.log(token);*/
             const token = response.headers['authorization'].split(' ')[1];
-            console.log(token);
 
             //로컬스토리지에 토큰 저장
             localStorage.setItem("token", token);
@@ -70,7 +72,6 @@ const LoginForm = () => {
 
             //로그인 성공시, 메인 화면으로 이동
             navigate('/');
-
 
         }).catch(error => {
             console.error(error);
@@ -83,37 +84,9 @@ const LoginForm = () => {
     return (
         <>
             <div id="wrap">
-
-                <div id="header" class="clearfix">
-                    <h1>
-                        <Link to="/">MySite</Link>
-                    </h1>
-
-                    {/*
-                            <ul>
-                                <li>황일영 님 안녕하세요^^</li>
-                                <li><button class="btn_s" onClick={handleLogout}>로그아웃</button></li>
-                                <li><Link to="" class="btn_s">회원정보수정</Link></li>
-                            </ul>
-*/}        
-                            <ul>
-                                <li><Link to="/user/loginform" class="btn_s">로그인</Link></li>
-                                <li><Link to="/user/joinform" class="btn_s">회원가입</Link></li>
-                            </ul>
-                        
-                </div>
+                {/* header */}
+                <Header />
                 {/* //header */}
-
-                <div id="nav">
-                    <ul class="clearfix">
-                        <li><Link to="">입사지원서</Link></li>
-                        <li><Link to="">게시판</Link></li>
-                        <li><Link to="">갤러리</Link></li>
-                        <li><Link to="">방명록</Link></li>
-                    </ul>
-                </div>
-                {/* //nav */}
-
                 <div id="container" class="clearfix">
                     <div id="aside">
                         <h2>회원</h2>
@@ -124,9 +97,7 @@ const LoginForm = () => {
                         </ul>
                     </div>
                     {/* //aside */}
-
                     <div id="content">
-
                         <div id="content-head">
                             <h3>로그인</h3>
                             <div id="location">
@@ -139,7 +110,6 @@ const LoginForm = () => {
                             <div class="clear"></div>
                         </div>
                         {/* //content-head */}
-
                         <div id="user">
                             <div id="loginForm">
                                 <form action="" method="" onSubmit={handleLogin}>
@@ -148,13 +118,11 @@ const LoginForm = () => {
                                         <label class="form-text" htmlFor="input-uid">아이디</label>
                                         <input type="text" id="input-uid" name="" value={id} placeholder="아이디를 입력하세요" onChange={handleId} />
                                     </div>
-
                                     {/* 비밀번호 */}
                                     <div class="form-group">
                                         <label class="form-text" htmlFor="input-pass">비밀번호</label>
                                         <input type="text" id="input-pass" name="" value={pw} placeholder="비밀번호를 입력하세요" onChange={handlePw} />
                                     </div>
-
                                     {/* 버튼영역 */}
                                     <div class="button-area">
                                         <button type="submit" id="btn-submit">로그인</button>
@@ -166,22 +134,15 @@ const LoginForm = () => {
                         {/* //user */}
                     </div>
                     {/* //content  */}
-
                 </div>
                 {/* //container  */}
-
-                <div id="footer">
-                    Copyright ⓒ 2020 황일영. All right reserved
-                </div>
-                {/* //footer */}
-
+                {/* <!-- footer --> */}
+                <Footer />
+                {/* <!-- //footer --> */}
             </div>
             {/* //wrap */}
-
         </>
-
     );
-
 }
 
 export default LoginForm;

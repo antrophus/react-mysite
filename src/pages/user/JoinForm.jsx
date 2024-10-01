@@ -1,7 +1,10 @@
 //import 라이브러리
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+import Header from '../include/Header';
+import Footer from '../include/Footer';
 
 //css
 import '../../css/user.css';
@@ -56,7 +59,7 @@ const JoinForm = () => {
 
         axios({
             method: 'POST',
-            url: 'http://localhost:9000/api/users',
+            url: `${process.env.REACT_APP_API_URL}/api/users`,
 
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
             data: userVo,
@@ -69,7 +72,7 @@ const JoinForm = () => {
             if (response.data.result === 'success') {
                 console.log("조인성공");
                 //리다이렉트
-                navigate('/user/loginform');
+                navigate('/user/joinok');
 
             } else {
                 alert(response.data.message);
@@ -85,9 +88,8 @@ const JoinForm = () => {
 
         axios({
             method: 'post',
-            url: `http://localhost:9000/api/users/checkid?id=${id}`,
-            headers: { 'Content-Type': 'application/json; charset=utf-8' },
-            
+            url: `${process.env.REACT_APP_API_URL}/api/users/checkid?id=${id}`
+            //headers: { 'Content-Type': 'application/json; charset=utf-8' },
             
         }).then(response => {
             console.log(response);
@@ -111,37 +113,9 @@ const JoinForm = () => {
         <>
 
             <div id="wrap">
-
-                <div id="header" class="clearfix">
-                    <h1>
-                        <Link to="/">MySite</Link>
-                    </h1>
-
-                    {/*
-                    <ul>
-                        <li>황일영 님 안녕하세요^^</li>
-                        <li><Link to="" class="btn_s">로그아웃</Link></li>
-                        <li><Link to="" class="btn_s">회원정보수정</Link></li>
-                    </ul>
-                    */}
-                    <ul>
-                        <li><Link to="/user/loginform" class="btn_s">로그인</Link></li>
-                        <li><Link to="/user/joinform" class="btn_s">회원가입</Link></li>
-                    </ul>
-
-                </div>
+                {/* header */}
+                <Header />
                 {/* //header */}
-
-                <div id="nav">
-                    <ul class="clearfix">
-                        <li><Link to="">입사지원서</Link></li>
-                        <li><Link to="">게시판</Link></li>
-                        <li><Link to="">갤러리</Link></li>
-                        <li><Link to="">방명록</Link></li>
-                    </ul>
-                </div>
-                {/* //nav */}
-
                 <div id="container" class="clearfix">
                     <div id="aside">
                         <h2>회원</h2>
@@ -196,10 +170,10 @@ const JoinForm = () => {
                                         <span class="form-text">성별</span>
 
                                         <label htmlFor="rdo-male">남</label>
-                                        <input type="radio" id="rdo-male" name="gender" value="male" onChange={handleGender} />
+                                        <input type="radio" id="rdo-male" name="gender" value="남" onChange={handleGender} />
 
                                         <label htmlFor="rdo-female">여</label>
-                                        <input type="radio" id="rdo-female" name="gender" value="female" onChange={handleGender} />
+                                        <input type="radio" id="rdo-female" name="gender" value="여" onChange={handleGender} />
 
                                     </div>
 
@@ -226,10 +200,9 @@ const JoinForm = () => {
                 </div>
                 {/* //container  */}
 
-                <div id="footer">
-                    Copyright ⓒ 2020 황일영. All right reserved
-                </div>
-                {/* //footer */}
+                {/* <!-- footer --> */}
+                <Footer />
+                {/* <!-- //footer --> */}
 
             </div>
             {/* //wrap */}
