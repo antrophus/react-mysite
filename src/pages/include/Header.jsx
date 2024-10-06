@@ -34,7 +34,7 @@ const Header = () => {
         <>
             <div id="header" class="clearfix">
                 <h1>
-                    <Link to="/" rel="noreferrer noopener">MySite</Link>
+                    <Link to="/" rel="noreferrer noopener">High-Media-Academy Practice-Site</Link>
                 </h1>
                 {
                     (token != null) ? (
